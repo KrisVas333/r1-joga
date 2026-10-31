@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>R1 Jogos Instruktorius</title>
+<meta name="description" content="Unitree R1 roboto jogos instruktoriaus demo: 3D simuliacija, balsas, pamokos valdymas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">{"imports": {"three": "./vendor/three.module.js"}}</script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="dot"></span><h1>R1 Jogos Instruktorius</h1></div>
+  <div class="topctl">
+    <button id="langBtn" class="ghost" aria-label="Kalba / Language">EN</button>
+    <button id="micBtn" class="ghost">🎤 Klausyk</button>
+  </div>
+</header>
+
+<section class="levelbar">
+  <span class="lbl" data-t="level">Lygis</span>
+  <div id="levels" class="levels"></div>
+  <span id="levelName" class="lname"></span>
+</section>
+<div id="lockBanner" class="lock" hidden></div>
+
+<main class="grid">
+  <section class="stage">
+    <div id="view" class="view"><div id="loading" class="loading">Kraunamas R1…</div></div>
+    <div class="viewbtns"><button data-view="front" data-t="vFront">priekis</button><button data-view="side" data-t="vSide">šonas</button><button data-view="three">3/4</button></div>
+    <span id="simTag" class="simtag" data-t="sim" hidden>simuliacija</span>
+    <div id="breath" class="breath"></div>
+    <p id="caption" class="caption" aria-live="polite"></p>
+  </section>
+
+  <section class="card">
+    <div class="cardtop"><span id="poseCount" class="mono small"></span><span id="state" class="mono small state"></span></div>
+    <h2 id="poseName">…</h2>
+    <p id="poseSub" class="sub"></p>
+    <span id="badge" class="badge"></span>
+    <p id="badgeNote" class="note"></p>
+    <h3 data-t="cues">Ką daryti</h3>
+    <ol id="cues" class="cues"></ol>
+    <p><b data-t="benefit">Nauda</b>: <span id="benefit"></span></p>
+    <p class="caut"><b data-t="caution">Atsargiai</b>: <span id="caution"></span></p>
+    <p id="timer" class="mono timer"></p>
+    <p id="voiceNote" class="vnote" hidden></p>
+    <p id="hint" class="hint"></p>
+  </section>
+</main>
+
+<nav id="timeline" class="timeline" aria-label="Pamokos eiga"></nav>
+
+<section class="tabs">
+  <div class="tabbar"><button class="tab" data-tab="0"></button><button class="tab" data-tab="1"></button><button class="tab" data-tab="2"></button><button class="tab" data-tab="3"></button><button class="tab" data-tab="4"></button></div>
+
+  <div class="panel" id="p-pad">
+    <div class="pad">
+      <div class="shoulders"><button data-pad="L1">L1</button><button data-pad="R1">R1</button></div>
+      <div class="face">
+        <button data-pad="Y" class="y">Y<small>Kitas</small></button>
+        <button data-pad="X" class="x">X<small>Paaiškink</small></button>
+        <button data-pad="B" class="b">B<small>Pauzė</small></button>
+        <button data-pad="A" class="a">A<small>Pradėti / Tęsti</small></button>
+      </div>
+    </div>
+    <p class="note">Unitree pultelio maketas. <b>Siūlomas</b> žemėlapis, <b>patikrinti su robotu</b>: A pradėti/tęsti · B pauzė · X paaiškink · Y kitas · <b>L1+R1 = STOP</b>.</p>
+    <p class="note">Klaviatūra: <kbd>Tarpas</kbd> pauzė/tęsti · <kbd>Esc</kbd> STOP · <kbd>←</kbd> <kbd>→</kbd> atgal/kitas · <kbd>E</kbd> paaiškink.</p>
+  </div>
+  <div class="panel" id="p-cmd" hidden>
+    <p class="note">Spausk 🎤 ir sakyk komandą. Lietuviškai (lt-LT) arba angliškai (en-US).</p>
+    <ul id="cmdList" class="cmds"></ul>
+    <p id="heard" class="mono small"></p>
+  </div>
+  <div class="panel" id="p-list" hidden><div id="poseList" class="poselist"></div></div>
+  <div class="panel" id="p-safe" hidden>
+    <div class="scroll"><table id="safetyTable" class="safety"></table></div>
+    <p id="safetyNote" class="note"></p>
+  </div>
+  <div class="panel" id="p-exp" hidden>
+    <p class="note" data-t="exportHelp">r1ctl dance YAML + rankų CSV (t + 13 sąnarių, 50 Hz, radianai). Tik viršutinė kūno dalis. Kojos lieka Unitree pusiausvyros valdikliui.</p>
+    <button id="btnExport" class="big" data-t="exportBtn">Atsisiųsti YAML + CSV</button>
+    <p id="exportNote" class="mono small"></p>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>⚗️ Eksperimentinis prototipas, sukurtas su AI. Gali klysti, svarbius dalykus pasitikrinkite. Nemokamas. Atsiliepimai laukiami: <a href="https://krisvas.lt">krisvas.lt</a></p>
+  <p class="small">R1 modelis: Unitree <i>unitree_mujoco</i> (BSD-3), žr. NOTICE. three.js (MIT). Robotas dar neprijungtas: viskas rodoma simuliacijoje.</p>
+</footer>
+
+<div class="controls" role="toolbar">
+  <button id="btnBack" class="ctl">◀<span data-t="back">Atgal</span></button>
+  <button id="btnStart" class="ctl go">▶<span data-t="start">Pradėti</span></button>
+  <button id="btnPause" class="ctl" hidden>⏸<span data-t="pause">Pauzė</span></button>
+  <button id="btnCont" class="ctl go" hidden>▶<span data-t="cont">Tęsti</span></button>
+  <button id="btnNext" class="ctl">▶▶<span data-t="next">Kitas</span></button>
+  <button id="btnExplain" class="ctl">?<span data-t="explain">Paaiškink pozą</span></button>
+  <div class="tempo"><button id="btnSlower" aria-label="lėčiau">−</button><span id="tempo" class="mono small"></span><button id="btnFaster" aria-label="greičiau">+</button></div>
+  <button id="btnStop" class="ctl stop">■<span data-t="stop">STOP</span></button>
+</div>
+
+<div id="checkin" class="modal" hidden>
+  <div class="mbox">
+    <p id="checkinQ" class="q">Ar galime tęsti?</p>
+    <div class="yn"><button id="yes" class="big go">👍 <span data-t="yes">Taip</span></button><button id="no" class="big">✋ <span data-t="no">Ne</span></button></div>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

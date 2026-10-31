@@ -1,0 +1,5 @@
+# never commit keys
+.env
+*.key
+elevenlabs-key*
+__pycache__/

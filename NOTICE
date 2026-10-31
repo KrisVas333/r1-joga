@@ -1,0 +1,12 @@
+R1 Jogos Instruktorius — third-party notices
+
+1. Unitree R1 robot model (model/r1.json, model/r1.bin)
+   Exported from Unitree Robotics' unitree_mujoco (unitree_robots/r1) via r1-studio/studio/tools/export_model.py.
+   Source: https://github.com/unitreerobotics/unitree_mujoco
+   License: BSD 3-Clause. Copyright (c) Unitree Robotics. Redistribution of the converted mesh data keeps this notice;
+   the Unitree name may not be used to endorse or promote this demo.
+
+2. three.js r160 (vendor/three.module.js) and OrbitControls (vendor/OrbitControls.js)
+   https://github.com/mrdoob/three.js — MIT License, Copyright © 2010-2024 three.js authors.
+
+3. Fonts: JetBrains Mono (OFL-1.1) and Inter (OFL-1.1), loaded from Google Fonts.

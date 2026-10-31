@@ -1,0 +1,262 @@
+{
+ "welcome": {
+  "lt": "Labas. Aš R1, tavo jogos instruktorius. Pradedam.",
+  "en": "Hello. I am R1, your yoga instructor. Let us begin."
+ },
+ "inhale": {
+  "lt": "Įkvėpk",
+  "en": "Breathe in"
+ },
+ "exhale": {
+  "lt": "Iškvėpk",
+  "en": "Breathe out"
+ },
+ "pause": {
+  "lt": "Pauzė. Pasakyk tęsk, kai būsi pasiruošęs.",
+  "en": "Pause. Say continue when you are ready."
+ },
+ "resume": {
+  "lt": "Tęsiam.",
+  "en": "Let us continue."
+ },
+ "stop": {
+  "lt": "Sustojam. Grįžtu į saugią padėtį.",
+  "en": "Stopping. Returning to a safe position."
+ },
+ "checkin_continue": {
+  "lt": "Ar galime tęsti?",
+  "en": "Can we continue?"
+ },
+ "checkin_clear": {
+  "lt": "Ar viskas aišku?",
+  "en": "Is everything clear?"
+ },
+ "again_slow": {
+  "lt": "Gerai, paaiškinsiu dar kartą, lėčiau.",
+  "en": "Okay, I will explain again, more slowly."
+ },
+ "slower": {
+  "lt": "Lėčiau.",
+  "en": "Slower."
+ },
+ "faster": {
+  "lt": "Greičiau.",
+  "en": "Faster."
+ },
+ "done": {
+  "lt": "Puiku. Pamoka baigta. Ačiū, kad sportavai kartu.",
+  "en": "Great. The class is done. Thank you for practising with me."
+ },
+ "locked": {
+  "lt": "Šis lygis rodomas tik ekrane. Apsivertimai ir grindys robotui nesaugu.",
+  "en": "This level is shown on screen only. Inversions and floor work are not safe for the robot."
+ },
+ "tadasana_intro": {
+  "lt": "Kalnas. Tadasana. Stovėk tiesiai, pėdos kartu. Pečiai atsipalaidavę, rankos šonuose. Kvėpuok ramiai per nosį.",
+  "en": "Mountain. Tadasana. Stand tall, feet together. Shoulders soft, arms by your sides. Breathe calmly through your nose."
+ },
+ "tadasana_explain": {
+  "lt": "Kalnas. Gerina laikyseną ir ramina. Stovėk tiesiai, pėdos kartu. Pečiai atsipalaidavę, rankos šonuose. Kvėpuok ramiai per nosį. Atsargiai: Nespausk kelių iki galo.",
+  "en": "Mountain. Improves posture and calms you. Stand tall, feet together. Shoulders soft, arms by your sides. Breathe calmly through your nose. Careful: Do not lock your knees."
+ },
+ "urdhva_hastasana_intro": {
+  "lt": "Rankos aukštyn. Urdhva Hastasana. Įkvėpk ir kelk rankas aukštyn. Delnai žiūri vienas į kitą. Pečius laikyk žemai.",
+  "en": "Upward Salute. Urdhva Hastasana. Breathe in and raise your arms. Palms face each other. Keep your shoulders low."
+ },
+ "urdhva_hastasana_explain": {
+  "lt": "Rankos aukštyn. Ištempia šonus ir atveria krūtinę. Įkvėpk ir kelk rankas aukštyn. Delnai žiūri vienas į kitą. Pečius laikyk žemai. Atsargiai: Jei skauda pečius, rankos tik iki pečių aukščio.",
+  "en": "Upward Salute. Stretches your sides and opens the chest. Breathe in and raise your arms. Palms face each other. Keep your shoulders low. Careful: If shoulders hurt, lift only to shoulder height."
+ },
+ "anjali_mudra_intro": {
+  "lt": "Maldos rankos. Anjali Mudra. Sudėk delnus prie krūtinės. Alkūnės žemyn ir į šonus. Užsimerk ir kvėpuok.",
+  "en": "Prayer Hands. Anjali Mudra. Bring palms together at your chest. Elbows down and wide. Close your eyes and breathe."
+ },
+ "anjali_mudra_explain": {
+  "lt": "Maldos rankos. Sutelkia dėmesį ir nuramina. Sudėk delnus prie krūtinės. Alkūnės žemyn ir į šonus. Užsimerk ir kvėpuok. Atsargiai: Spausk delnus švelniai.",
+  "en": "Prayer Hands. Focuses attention and calms. Bring palms together at your chest. Elbows down and wide. Close your eyes and breathe. Careful: Press palms gently."
+ },
+ "side_stretch_intro": {
+  "lt": "Šoninis tempimas. Parsva Urdhva Hastasana. Rankos aukštyn. Lenkis į vieną šoną, paskui į kitą. Abi pėdos stipriai ant žemės.",
+  "en": "Side Stretch. Parsva Urdhva Hastasana. Arms up. Lean to one side, then the other. Both feet firm on the floor."
+ },
+ "side_stretch_explain": {
+  "lt": "Šoninis tempimas. Ištempia šonus ir kvėpavimo raumenis. Rankos aukštyn. Lenkis į vieną šoną, paskui į kitą. Abi pėdos stipriai ant žemės. Atsargiai: Lenkis tik tiek, kiek malonu.",
+  "en": "Side Stretch. Stretches the sides and breathing muscles. Arms up. Lean to one side, then the other. Both feet firm on the floor. Careful: Lean only as far as feels good."
+ },
+ "standing_twist_intro": {
+  "lt": "Stovint sukimas. Kati Chakrasana. Rankos prie krūtinės. Iškvėpdamas suk liemenį į šoną. Klubai lieka vietoje.",
+  "en": "Standing Twist. Kati Chakrasana. Hands at your chest. Breathe out and turn your waist. Hips stay still."
+ },
+ "standing_twist_explain": {
+  "lt": "Stovint sukimas. Judina nugarą ir gerina virškinimą. Rankos prie krūtinės. Iškvėpdamas suk liemenį į šoną. Klubai lieka vietoje. Atsargiai: Suk lėtai, be trūkčiojimų.",
+  "en": "Standing Twist. Mobilises the spine and helps digestion. Hands at your chest. Breathe out and turn your waist. Hips stay still. Careful: Twist slowly, no jerks."
+ },
+ "garudasana_arms_intro": {
+  "lt": "Erelio rankos. Garudasana (rankos). Sukryžiuok rankas priešais save. Alkūnės pečių aukštyje. Jausk tempimą tarp menčių.",
+  "en": "Eagle Arms. Garudasana (rankos). Cross your arms in front of you. Elbows at shoulder height. Feel the stretch between your shoulder blades."
+ },
+ "garudasana_arms_explain": {
+  "lt": "Erelio rankos. Atpalaiduoja pečius ir viršutinę nugarą. Sukryžiuok rankas priešais save. Alkūnės pečių aukštyje. Jausk tempimą tarp menčių. Atsargiai: Nespausk alkūnių per jėgą.",
+  "en": "Eagle Arms. Releases shoulders and upper back. Cross your arms in front of you. Elbows at shoulder height. Feel the stretch between your shoulder blades. Careful: Do not force the elbows."
+ },
+ "neck_shoulders_intro": {
+  "lt": "Kaklo ir pečių sukimai. Skandha Chakra. Lėtai pasuk galvą į šonus. Kelk ir leisk pečius. Judėk kartu su kvėpavimu.",
+  "en": "Neck and Shoulder Rolls. Skandha Chakra. Slowly turn your head side to side. Lift and drop your shoulders. Move with your breath."
+ },
+ "neck_shoulders_explain": {
+  "lt": "Kaklo ir pečių sukimai. Atpalaiduoja kaklą po sėdėjimo. Lėtai pasuk galvą į šonus. Kelk ir leisk pečius. Judėk kartu su kvėpavimu. Atsargiai: Galvos neversk atgal.",
+  "en": "Neck and Shoulder Rolls. Relaxes the neck after sitting. Slowly turn your head side to side. Lift and drop your shoulders. Move with your breath. Careful: Do not drop your head back."
+ },
+ "breath_arms_intro": {
+  "lt": "Kvėpavimas su rankomis. Pranayama. Įkvėpdamas kelk rankas per šonus. Iškvėpdamas leisk žemyn. Judesys toks pat ilgas kaip kvėpavimas.",
+  "en": "Breathing with Arms. Pranayama. Breathe in, lift arms out to the sides. Breathe out, lower them. Make the move as long as the breath."
+ },
+ "breath_arms_explain": {
+  "lt": "Kvėpavimas su rankomis. Nuramina širdį ir mintis. Įkvėpdamas kelk rankas per šonus. Iškvėpdamas leisk žemyn. Judesys toks pat ilgas kaip kvėpavimas. Atsargiai: Jei svaigsta galva, kvėpuok ramiau.",
+  "en": "Breathing with Arms. Calms the heart and the mind. Breathe in, lift arms out to the sides. Breathe out, lower them. Make the move as long as the breath. Careful: If you feel dizzy, breathe more gently."
+ },
+ "utkatasana_intro": {
+  "lt": "Kėdė. Utkatasana. Sulenk kelius lyg sėstum ant kėdės. Rankos aukštyn. Svoris ant kulnų.",
+  "en": "Chair. Utkatasana. Bend your knees as if sitting on a chair. Arms up. Weight in your heels."
+ },
+ "utkatasana_explain": {
+  "lt": "Kėdė. Stiprina kojas ir nugarą. Sulenk kelius lyg sėstum ant kėdės. Rankos aukštyn. Svoris ant kulnų. Atsargiai: Keliai neina už pirštų.",
+  "en": "Chair. Strengthens legs and back. Bend your knees as if sitting on a chair. Arms up. Weight in your heels. Careful: Knees stay behind your toes."
+ },
+ "virabhadrasana2_intro": {
+  "lt": "Karys II. Virabhadrasana II. Plačiai pastatyk kojas. Priekinį kelį sulenk. Rankos į šonus, žiūrėk per priekinę ranką.",
+  "en": "Warrior II. Virabhadrasana II. Step your feet wide. Bend the front knee. Arms out, look over the front hand."
+ },
+ "virabhadrasana2_explain": {
+  "lt": "Karys II. Stiprina kojas, ugdo ištvermę. Plačiai pastatyk kojas. Priekinį kelį sulenk. Rankos į šonus, žiūrėk per priekinę ranką. Atsargiai: Kelis virš kulno.",
+  "en": "Warrior II. Builds leg strength and stamina. Step your feet wide. Bend the front knee. Arms out, look over the front hand. Careful: Knee above the ankle."
+ },
+ "virabhadrasana1_intro": {
+  "lt": "Karys I. Virabhadrasana I. Viena koja priekyje, kita gale. Priekinį kelį sulenk. Rankos aukštyn, krūtinė į priekį.",
+  "en": "Warrior I. Virabhadrasana I. One foot forward, one back. Bend the front knee. Arms up, chest forward."
+ },
+ "virabhadrasana1_explain": {
+  "lt": "Karys I. Stiprina kojas ir atveria klubus. Viena koja priekyje, kita gale. Priekinį kelį sulenk. Rankos aukštyn, krūtinė į priekį. Atsargiai: Nugarą laikyk ilgą.",
+  "en": "Warrior I. Strengthens legs and opens the hips. One foot forward, one back. Bend the front knee. Arms up, chest forward. Careful: Keep your back long."
+ },
+ "trikonasana_intro": {
+  "lt": "Trikampis. Trikonasana. Kojos plačiai, kojos tiesios. Lenkis į šoną, ranka žemyn. Kita ranka į lubas.",
+  "en": "Triangle. Trikonasana. Feet wide, legs straight. Tilt to the side, one hand down. Other hand to the ceiling."
+ },
+ "trikonasana_explain": {
+  "lt": "Trikampis. Ištempia kojas ir šonus. Kojos plačiai, kojos tiesios. Lenkis į šoną, ranka žemyn. Kita ranka į lubas. Atsargiai: Ranka remiasi į koją, ne į kelį.",
+  "en": "Triangle. Stretches legs and sides. Feet wide, legs straight. Tilt to the side, one hand down. Other hand to the ceiling. Careful: Rest the hand on the shin, not the knee."
+ },
+ "vrksasana_intro": {
+  "lt": "Medis. Vrksasana. Stovėk ant vienos kojos. Kitą pėdą dėk prie blauzdos ar šlaunies. Rankos maldoje, žvilgsnis viename taške.",
+  "en": "Tree. Vrksasana. Stand on one leg. Place the other foot on your calf or thigh. Hands in prayer, eyes on one spot."
+ },
+ "vrksasana_explain": {
+  "lt": "Medis. Lavina pusiausvyrą ir dėmesį. Stovėk ant vienos kojos. Kitą pėdą dėk prie blauzdos ar šlaunies. Rankos maldoje, žvilgsnis viename taške. Atsargiai: Pėdos nespausk prie kelio.",
+  "en": "Tree. Trains balance and focus. Stand on one leg. Place the other foot on your calf or thigh. Hands in prayer, eyes on one spot. Careful: Never press the foot into the knee."
+ },
+ "gomukhasana_arms_intro": {
+  "lt": "Karvės veido rankos. Gomukhasana (rankos). Viena ranka aukštyn ir už galvos. Kita ranka žemyn už nugaros. Pirštai ieško vieni kitų.",
+  "en": "Cow Face Arms. Gomukhasana (rankos). One arm up and behind your head. Other arm down behind your back. Fingers reach for each other."
+ },
+ "gomukhasana_arms_explain": {
+  "lt": "Karvės veido rankos. Atveria pečius ir krūtinę. Viena ranka aukštyn ir už galvos. Kita ranka žemyn už nugaros. Pirštai ieško vieni kitų. Atsargiai: Jei nesiekia, laikyk diržą.",
+  "en": "Cow Face Arms. Opens shoulders and chest. One arm up and behind your head. Other arm down behind your back. Fingers reach for each other. Careful: Use a strap if hands do not meet."
+ },
+ "parsvakonasana_intro": {
+  "lt": "Ištiestas šoninis kampas. Utthita Parsvakonasana. Iš Kario II lenkis prie priekinės kojos. Dilbis ant šlaunies. Viršutinė ranka tęsiasi virš galvos.",
+  "en": "Extended Side Angle. Utthita Parsvakonasana. From Warrior II lean over the front leg. Forearm on the thigh. Top arm reaches over your head."
+ },
+ "parsvakonasana_explain": {
+  "lt": "Ištiestas šoninis kampas. Ištempia visą šoną nuo pėdos iki rankos. Iš Kario II lenkis prie priekinės kojos. Dilbis ant šlaunies. Viršutinė ranka tęsiasi virš galvos. Atsargiai: Krūtinė lieka atvira.",
+  "en": "Extended Side Angle. Stretches the whole side from foot to hand. From Warrior II lean over the front leg. Forearm on the thigh. Top arm reaches over your head. Careful: Keep the chest open."
+ },
+ "ardha_chandrasana_intro": {
+  "lt": "Pusmėnulis. Ardha Chandrasana. Ranka į grindis po petimi. Kelk užpakalinę koją lygiagrečiai grindims. Viršutinė ranka į lubas.",
+  "en": "Half Moon. Ardha Chandrasana. Hand to the floor under the shoulder. Lift the back leg parallel to the floor. Top hand to the ceiling."
+ },
+ "ardha_chandrasana_explain": {
+  "lt": "Pusmėnulis. Stiprina pusiausvyrą ir šonus. Ranka į grindis po petimi. Kelk užpakalinę koją lygiagrečiai grindims. Viršutinė ranka į lubas. Atsargiai: Naudok kaladėlę po ranka.",
+  "en": "Half Moon. Builds balance and side strength. Hand to the floor under the shoulder. Lift the back leg parallel to the floor. Top hand to the ceiling. Careful: Use a block under the hand."
+ },
+ "parivrtta_trikonasana_intro": {
+  "lt": "Susuktas trikampis. Parivrtta Trikonasana. Kojos tiesios, klubai į priekį. Lenkis pirmyn ir suk krūtinę. Viena ranka žemyn, kita aukštyn.",
+  "en": "Revolved Triangle. Parivrtta Trikonasana. Legs straight, hips square. Fold forward and turn the chest. One hand down, one hand up."
+ },
+ "parivrtta_trikonasana_explain": {
+  "lt": "Susuktas trikampis. Sukimas stiprina nugarą ir pusiausvyrą. Kojos tiesios, klubai į priekį. Lenkis pirmyn ir suk krūtinę. Viena ranka žemyn, kita aukštyn. Atsargiai: Nugarą pirmiausia ištiesk, tik tada suk.",
+  "en": "Revolved Triangle. The twist strengthens back and balance. Legs straight, hips square. Fold forward and turn the chest. One hand down, one hand up. Careful: Lengthen the spine first, then twist."
+ },
+ "garudasana_intro": {
+  "lt": "Erelis. Garudasana. Sulenk kelius. Apvyniok vieną koją aplink kitą. Rankos erelio padėtyje.",
+  "en": "Eagle. Garudasana. Bend your knees. Wrap one leg around the other. Arms in eagle position."
+ },
+ "garudasana_explain": {
+  "lt": "Erelis. Stiprina kulkšnis ir pusiausvyrą. Sulenk kelius. Apvyniok vieną koją aplink kitą. Rankos erelio padėtyje. Atsargiai: Pirštai gali liesti grindis.",
+  "en": "Eagle. Strengthens ankles and balance. Bend your knees. Wrap one leg around the other. Arms in eagle position. Careful: Toes may stay on the floor."
+ },
+ "virabhadrasana3_intro": {
+  "lt": "Karys III. Virabhadrasana III. Stovėk ant vienos kojos. Lenkis pirmyn, kita koja atgal. Kūnas kaip raidė T.",
+  "en": "Warrior III. Virabhadrasana III. Stand on one leg. Tip forward, lift the other leg back. Body like the letter T."
+ },
+ "virabhadrasana3_explain": {
+  "lt": "Karys III. Stiprina visą užpakalinę kūno pusę. Stovėk ant vienos kojos. Lenkis pirmyn, kita koja atgal. Kūnas kaip raidė T. Atsargiai: Rankas gali laikyti ant klubų.",
+  "en": "Warrior III. Strengthens the whole back of the body. Stand on one leg. Tip forward, lift the other leg back. Body like the letter T. Careful: You may keep hands on your hips."
+ },
+ "natarajasana_intro": {
+  "lt": "Šokėjas. Natarajasana. Suimk pėdą už nugaros. Spausk pėdą į delną. Kita ranka į priekį ir aukštyn.",
+  "en": "Dancer. Natarajasana. Hold your foot behind you. Press the foot into your hand. Other arm forward and up."
+ },
+ "natarajasana_explain": {
+  "lt": "Šokėjas. Atveria krūtinę ir lavina pusiausvyrą. Suimk pėdą už nugaros. Spausk pėdą į delną. Kita ranka į priekį ir aukštyn. Atsargiai: Nelenk juosmens per stipriai.",
+  "en": "Dancer. Opens the chest and trains balance. Hold your foot behind you. Press the foot into your hand. Other arm forward and up. Careful: Do not over-arch the low back."
+ },
+ "bakasana_intro": {
+  "lt": "Varna. Bakasana. Delnai ant grindų. Keliai ant žastų. Lėtai perkelk svorį į rankas.",
+  "en": "Crow. Bakasana. Palms on the floor. Knees on your upper arms. Slowly shift weight into the hands."
+ },
+ "bakasana_explain": {
+  "lt": "Varna. Stiprina rankas ir pilvo raumenis. Delnai ant grindų. Keliai ant žastų. Lėtai perkelk svorį į rankas. Atsargiai: Pagalvė priešais veidą.",
+  "en": "Crow. Builds arm and core strength. Palms on the floor. Knees on your upper arms. Slowly shift weight into the hands. Careful: Put a cushion in front of your face."
+ },
+ "padmasana_intro": {
+  "lt": "Lotosas. Padmasana. Sėsk sukryžiavęs kojas. Pėdos ant priešingų šlaunų. Nugara tiesi, rankos ant kelių.",
+  "en": "Lotus. Padmasana. Sit cross-legged. Feet on the opposite thighs. Spine tall, hands on knees."
+ },
+ "padmasana_explain": {
+  "lt": "Lotosas. Ramina ir tinka meditacijai. Sėsk sukryžiavęs kojas. Pėdos ant priešingų šlaunų. Nugara tiesi, rankos ant kelių. Atsargiai: Saugok kelius, rinkis pusę lotoso.",
+  "en": "Lotus. Calming, good for meditation. Sit cross-legged. Feet on the opposite thighs. Spine tall, hands on knees. Careful: Protect your knees, try half lotus."
+ },
+ "sirsasana_intro": {
+  "lt": "Stovėjimas ant galvos. Sirsasana. Dilbiai ant grindų, pirštai supinti. Galvos viršus ant grindų. Kojas kelk lėtai ir kartu.",
+  "en": "Headstand. Sirsasana. Forearms down, fingers laced. Crown of the head on the floor. Lift both legs slowly together."
+ },
+ "sirsasana_explain": {
+  "lt": "Stovėjimas ant galvos. Stiprina pečius ir pilvą. Dilbiai ant grindų, pirštai supinti. Galvos viršus ant grindų. Kojas kelk lėtai ir kartu. Atsargiai: Tik su mokytoju ir prie sienos.",
+  "en": "Headstand. Strengthens shoulders and core. Forearms down, fingers laced. Crown of the head on the floor. Lift both legs slowly together. Careful: Only with a teacher, near a wall."
+ },
+ "adho_mukha_vrksasana_intro": {
+  "lt": "Stovėjimas ant rankų. Adho Mukha Vrksasana. Delnai pečių plotyje. Spirkis ir kelk kojas prie sienos. Žiūrėk tarp delnų.",
+  "en": "Handstand. Adho Mukha Vrksasana. Hands shoulder width. Kick up to the wall. Look between your hands."
+ },
+ "adho_mukha_vrksasana_explain": {
+  "lt": "Stovėjimas ant rankų. Stiprina rankas ir pasitikėjimą. Delnai pečių plotyje. Spirkis ir kelk kojas prie sienos. Žiūrėk tarp delnų. Atsargiai: Tik su pagalbininku.",
+  "en": "Handstand. Builds arm strength and confidence. Hands shoulder width. Kick up to the wall. Look between your hands. Careful: Only with a spotter."
+ },
+ "urdhva_dhanurasana_intro": {
+  "lt": "Ratas. Urdhva Dhanurasana. Gulėk ant nugaros, delnai prie ausų. Spausk delnus ir pėdas. Kelk klubus ir krūtinę.",
+  "en": "Wheel. Urdhva Dhanurasana. Lie on your back, hands by your ears. Press hands and feet. Lift hips and chest."
+ },
+ "urdhva_dhanurasana_explain": {
+  "lt": "Ratas. Gilus krūtinės ir pečių atvėrimas. Gulėk ant nugaros, delnai prie ausų. Spausk delnus ir pėdas. Kelk klubus ir krūtinę. Atsargiai: Tik apšilus ir su mokytoju.",
+  "en": "Wheel. Deep chest and shoulder opener. Lie on your back, hands by your ears. Press hands and feet. Lift hips and chest. Careful: Only warmed up and with a teacher."
+ },
+ "kapotasana_intro": {
+  "lt": "Karališkas balandis. Kapotasana. Klūpėk, keliai klubų plotyje. Lenkis atgal, krūtinė į lubas. Rankos siekia pėdų.",
+  "en": "King Pigeon. Kapotasana. Kneel, knees hip width. Arch back, chest to the ceiling. Hands reach for the feet."
+ },
+ "kapotasana_explain": {
+  "lt": "Karališkas balandis. Atveria klubų priekį ir krūtinę. Klūpėk, keliai klubų plotyje. Lenkis atgal, krūtinė į lubas. Rankos siekia pėdų. Atsargiai: Pažengusiems. Saugok juosmenį.",
+  "en": "King Pigeon. Opens hip flexors and chest. Kneel, knees hip width. Arch back, chest to the ceiling. Hands reach for the feet. Careful: Advanced. Protect your low back."
+ }
+}
