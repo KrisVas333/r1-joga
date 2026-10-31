@@ -127,3 +127,14 @@ body.flash .controls{background:#FDECEF}
   .ctl.stop span{font-size:18px}
   .view{height:46vh}
 }
+
+/* 🤖 robot mode (only active when served by R1 Studio at /joga/) */
+.robotbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:8px 16px;border-bottom:1px solid var(--line);font-size:15px}
+.rnote{color:var(--muted)}
+#robotBtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.rchip{font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:4px 8px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+.rchip.live{background:var(--accent);color:#fff;border-color:var(--accent)}
+.rlog{color:var(--muted);overflow-wrap:anywhere}
+.golist{margin:8px 0 12px;padding-left:20px;text-align:left}
+.golbl{display:block;margin:0 0 12px;font-weight:700}
+#goInput{font:700 22px var(--mono);width:5.5em;padding:8px;border:2px solid var(--ink);border-radius:var(--r);text-transform:uppercase;text-align:center}

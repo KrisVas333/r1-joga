@@ -1,7 +1,7 @@
 // R1 Jogos Instruktorius: class runner, voice, controller mock, safety check, export.
 import { Robot3D } from "./robot.js";
 import { ASANAS, LEVELS, byLevel, REST_POSE, PHRASES, introText, explainText } from "./asanas.js";
-import { moveDur, safety, buildExport, full, BLOCK } from "./timeline.js";
+import { moveDur, safety, buildExport, full, BLOCK, poseMoveName } from "./timeline.js";
 import { CAP } from "./joints.js";
 import { track } from "./track.js";
 
@@ -19,6 +19,9 @@ const UI = {
     tempo: "Tempas", pose: "Poza", of: "iš", exportBtn: "Atsisiųsti YAML + CSV", exportLocked: "4–6 lygiai neeksportuojami: robotui užrakinta.",
     safetyHead: ["Poza", "Ženklas", "Maks. greitis", "Maks. ribos dalis", "Vėliavos"], ok: "✅ gerai",
     soundOn: "🔊 Garsas įjungtas", vFront: "priekis", vSide: "šonas", exportHelp: "r1ctl dance YAML + rankų CSV (t + 13 sąnarių, 50 Hz, radianai). Tik viršutinė kūno dalis. Kojos lieka Unitree pusiausvyros valdikliui.", tapToStart: "Paspausk Pradėti: robotas kalbės ir ves pamoką.",
+    rNote: "🤖 Robotas: paleisk iš R1 Studio serverio", rOff: "🤖 Robotas: išjungtas", rOn: "🤖 Robotas: ĮJUNGTAS", rLive: "LIVE", rDry: "DRY-RUN (serveris be --live)",
+    rStudio: "R1 Studio rastas. Spausk 🤖 Robotas, kad pozos keliautų į robotą.", goTitle: "⚠️ Tikras robotas", goAsk: "Įrašyk GO:",
+    goList: ["Pirmi kartai: robotas ant kėlimo rėmo (gantry)", "Pultelis rankoje (avarinis stabdymas)", "2 m laisvos vietos, vaikai už linijos", "Jokių pirštų roboto plaštakose", "Esc arba ■ STOP = stabdyti iškart"],
   },
   en: {
     start: "Start", pause: "Pause", cont: "Continue", next: "Next", back: "Back", explain: "Explain pose", stop: "STOP",
@@ -32,6 +35,9 @@ const UI = {
     tempo: "Tempo", pose: "Pose", of: "of", exportBtn: "Download YAML + CSV", exportLocked: "Levels 4–6 are not exported: locked for the robot.",
     safetyHead: ["Pose", "Badge", "Max speed", "Max range used", "Flags"], ok: "✅ ok",
     soundOn: "🔊 Sound on", vFront: "front", vSide: "side", exportHelp: "r1ctl dance YAML + arm CSV (t + 13 joints, 50 Hz, radians). Upper body only. Legs stay with Unitree's balance controller.", tapToStart: "Press Start: the robot will speak and lead the class.",
+    rNote: "🤖 Robot: run this page from the R1 Studio server", rOff: "🤖 Robot: off", rOn: "🤖 Robot: ON", rLive: "LIVE", rDry: "DRY-RUN (server without --live)",
+    rStudio: "R1 Studio found. Press 🤖 Robot to send each pose to the robot.", goTitle: "⚠️ Real robot", goAsk: "Type GO:",
+    goList: ["First runs: robot on the gantry", "Remote in hand (emergency stop)", "2 m clear, kids behind the line", "No fingers in the robot's hands", "Esc or ■ STOP = stop at once"],
   },
 };
 const COMMANDS = [
@@ -83,12 +89,24 @@ function say(id, text, { rate = 1, lang = S.lang } = {}) {
   return new Promise((resolve) => {
     const done = () => { clearTimeout(timer); resolve(); };
     const timer = setTimeout(resolve, Math.max(2500, text.length * 110 / rate)); // safety net if onend never fires
-    if (id && S.manifest[lang] && S.manifest[lang].includes(id)) {
-      const a = new Audio(`audio/${lang}/${id}.mp3`); a.playbackRate = rate; S.audio = a;
-      a.onended = done; a.onerror = () => tts(); a.play().catch(() => tts());
+    if (R.on && R.eleven) { // robot mode: Kris's ElevenLabs voice rendered by the studio server (/api/tts, cached there)
+      const my = ++R.sayId;
+      fetch(`/api/tts?text=${encodeURIComponent(text)}`).then((r) => (r.ok ? r.blob() : Promise.reject(r.status))).then((b) => {
+        if (my !== R.sayId) return resolve();
+        const a = new Audio(URL.createObjectURL(b)); a.playbackRate = rate; S.audio = a;
+        a.onended = done; a.onerror = () => local(); a.play().catch(() => local());
+      }).catch(() => (my === R.sayId ? local() : resolve()));
       return;
     }
-    tts();
+    local();
+    function local() {
+      if (id && S.manifest[lang] && S.manifest[lang].includes(id)) {
+        const a = new Audio(`audio/${lang}/${id}.mp3`); a.playbackRate = rate; S.audio = a;
+        a.onended = done; a.onerror = () => tts(); a.play().catch(() => tts());
+        return;
+      }
+      tts();
+    }
     function tts() {
       if (!("speechSynthesis" in window)) return;
       let t = text, v = lang === "lt" ? ltVoice() : enVoice();
@@ -133,6 +151,7 @@ async function run(welcome = false) {
     const resumeHold = S.hold != null;
     if (!resumeHold) {
       const kf0 = full(a.kf[0]);
+      robotPlay(a); // 🤖 queued: starts after the previous robot move has finished
       await Promise.all([say(`${a.id}_intro`, introText(a, S.lang)), robot.moveTo(kf0, moveDur(robot.q, kf0, S.tempo) * 1000, sig)]);
       if (my !== S.runId) return;
       S.hold = a.hold;
@@ -159,6 +178,7 @@ async function run(welcome = false) {
     }
     setBreath(null);
     S.hold = null;
+    if (R.on && R.inflight) { await R.inflight; if (my !== S.runId) return; } // robot finishes rest → pose → rest first
     // check-in after each block
     if ((S.idx + 1) % BLOCK === 0 || S.idx + 1 === S.flow.length) {
       if (S.idx + 1 < S.flow.length) { const ok = await checkin(my); if (my !== S.runId || !ok) return; }
@@ -166,6 +186,7 @@ async function run(welcome = false) {
     S.idx++;
   }
   S.phase = "done"; render();
+  if (R.on) api("/api/end").catch(() => {}); // hand the arm back to Unitree's controller
   await robot.moveTo(full(REST_POSE), 2000, sig);
   say("done", PHRASES.done[S.lang]);
   track("class_done", { level: S.level });
@@ -174,6 +195,7 @@ async function run(welcome = false) {
 function pause() {
   if (S.phase !== "running" && S.phase !== "checkin") return;
   S.runId++; if (S.ctrl) S.ctrl.abort(); stopSpeech(); closeCheckin();
+  if (R.on) S.hold = null; // robot: current move finishes (back to rest), no new steps; Tęsti replays this pose
   S.phase = "paused"; render(); say("pause", PHRASES.pause[S.lang]);
 }
 function cont() {
@@ -181,13 +203,15 @@ function cont() {
   say("resume", PHRASES.resume[S.lang]).then(() => run());
   S.phase = "running"; render();
 }
-function jump(d) {
+async function jump(d) {
   S.runId++; if (S.ctrl) S.ctrl.abort(); stopSpeech(); closeCheckin();
+  if (R.on && R.inflight) await robotStop(); // stop the current robot move, then play the next one
   S.idx = Math.max(0, Math.min(S.flow.length - 1, S.idx + d)); S.hold = null;
   if (S.phase === "running" || S.phase === "checkin") run(); else { renderCard(); previewPose(); }
 }
 // STOP: abort everything and ease to the safe neutral pose in 2 s
 async function stop() {
+  robotStop(); // first thing: POST /api/stop
   S.runId++; if (S.ctrl) S.ctrl.abort(); stopSpeech(); closeCheckin();
   S.phase = "stopped"; S.hold = null; S.stopped = true; render(); setBreath(null);
   document.body.classList.add("flash"); setTimeout(() => document.body.classList.remove("flash"), 600);
@@ -237,6 +261,7 @@ function answer(v) { if (S.checkin && !$("#checkin").hidden) { const f = S.check
 // ---------- level / language ----------
 function setLevel(n) {
   S.runId++; if (S.ctrl) S.ctrl.abort(); stopSpeech(); closeCheckin();
+  if (R.on && R.inflight) robotStop();
   setCaption(""); S.level = n; S.flow = byLevel(n); S.idx = 0; S.hold = null; S.phase = "idle";
   track("level", { level: n });
   render(); renderCard(); renderList(); renderSafety(); previewPose();
@@ -268,7 +293,7 @@ function render() {
   $("#lockBanner").hidden = S.level < 4; $("#lockBanner").textContent = t.locked;
   $("#hint").textContent = S.phase === "idle" ? t.tapToStart : "";
   document.querySelectorAll(".tab").forEach((b, i) => (b.textContent = t.tabs[i]));
-  renderTimeline();
+  renderTimeline(); renderRobot();
 }
 function renderCard() {
   const a = S.flow[S.idx], t = T(); if (!a) return;
@@ -329,6 +354,73 @@ function doExport() {
   $("#exportNote").textContent = `✅ ${name}.yaml + ${name}.csv · ${ex.rows} eil. · ${ex.seconds.toFixed(0)} s · 50 Hz`;
   track("export", { level: S.level });
 }
+
+// ---------- 🤖 robot mode: only when this page is served by R1 Studio (http://<robot>:8080/joga/) ----------
+// GitHub Pages (https) cannot reach the robot (mixed content, no CORS), so there the page stays sim-only.
+// Off by default; on = GO typed. Each pose = one r1ctl arm move joga_l<level>_<id> via POST /api/step.
+// The server moves the real robot only when started with --live; otherwise it logs a dry run.
+const R = { studio: false, liveAllowed: false, eleven: false, on: false, inflight: null, gen: 0, sayId: 0 };
+const STUDIO_PROBE = location.protocol === "http:" && (location.pathname.startsWith("/joga/") || /[?&]studio=1\b/.test(location.search));
+async function api(path, body = {}) {
+  const r = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || j.error) throw new Error(j.error || `HTTP ${r.status}`);
+  return j;
+}
+async function probeStudio() {
+  if (!STUDIO_PROBE) return;
+  try {
+    const s = await (await fetch("/api/status", { cache: "no-store" })).json();
+    if (typeof s.live_allowed === "boolean") { R.studio = true; R.liveAllowed = s.live_allowed; R.eleven = !!s.eleven; robotLog(T().rStudio); }
+  } catch (e) {}
+  renderRobot();
+}
+function robotLog(m) { const el = $("#robotLog"); if (el) el.textContent = m; }
+const robotPoseOk = (a) => a && a.level <= 3 && !a.locked;
+function robotPlay(a) {
+  if (!R.on || !robotPoseOk(a)) return;
+  const gen = R.gen, name = poseMoveName(a), prev = R.inflight || Promise.resolve();
+  const p = prev.then(async () => {
+    if (!R.on || gen !== R.gen) return; // stopped or skipped while waiting
+    robotLog(`▶ ${name}`);
+    const r = await api("/api/step", { step: { arm_traj: { file: name, speed: Math.min(1, S.tempo) } }, live: true });
+    robotLog(r.live ? `✅ ${name}` : `🧪 ${name}: dry-run, niekas nejuda`);
+  }).catch((e) => robotLog(`❌ ${name}: ${e.message}`));
+  R.inflight = p; p.finally(() => { if (R.inflight === p) R.inflight = null; });
+}
+async function robotStop() {
+  if (!R.studio) return;
+  R.gen++;
+  const req = fetch("/api/stop", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }).catch(() => {});
+  robotLog("🛑 STOP → /api/stop");
+  await req;
+  if (R.inflight) await Promise.race([R.inflight, sleep(8000)]);
+}
+function goGate() {
+  return new Promise((resolve) => {
+    const t = T(); $("#goTitle").textContent = t.goTitle; $("#goAsk").textContent = t.goAsk;
+    $("#goList").innerHTML = t.goList.map((x) => `<li>${x}</li>`).join("");
+    $("#goInput").value = ""; $("#goModal").hidden = false; $("#goInput").focus();
+    const close = (v) => { $("#goModal").hidden = true; $("#goOk").onclick = $("#goCancel").onclick = $("#goInput").onkeydown = null; resolve(v); };
+    $("#goOk").onclick = () => close($("#goInput").value.trim().toUpperCase() === "GO");
+    $("#goCancel").onclick = () => close(false);
+    $("#goInput").onkeydown = (e) => { if (e.key === "Enter") $("#goOk").click(); if (e.key === "Escape") close(false); };
+  });
+}
+async function toggleRobot() {
+  if (!R.studio) return;
+  if (R.on) { await robotStop(); R.on = false; api("/api/end").catch(() => {}); track("robot_off"); }
+  else if (await goGate()) { R.on = true; track("robot_on", { live: R.liveAllowed }); }
+  renderRobot();
+}
+function renderRobot() {
+  const t = T();
+  $("#robotNote").hidden = R.studio; $("#robotNote").textContent = t.rNote;
+  $("#robotBtn").hidden = !R.studio; $("#robotBtn").textContent = R.on ? t.rOn : t.rOff; $("#robotBtn").setAttribute("aria-pressed", R.on);
+  const c = $("#robotChip"); c.hidden = !R.studio; c.textContent = R.liveAllowed ? t.rLive : t.rDry; c.classList.toggle("live", R.liveAllowed && R.on);
+}
+addEventListener("pagehide", () => { if (R.on) navigator.sendBeacon("/api/stop", "{}"); });
+window.__r1joga.R = R;
 
 // ---------- voice commands ----------
 function act(a) {
@@ -399,7 +491,7 @@ $("#btnExplain").onclick = () => explain(); $("#btnStop").onclick = stop;
 $("#btnSlower").onclick = () => setTempo(-0.25); $("#btnFaster").onclick = () => setTempo(0.25);
 $("#yes").onclick = () => answer(true); $("#no").onclick = () => answer(false);
 $("#langBtn").onclick = () => setLang(S.lang === "lt" ? "en" : "lt");
-$("#micBtn").onclick = toggleMic; $("#btnExport").onclick = doExport;
+$("#micBtn").onclick = toggleMic; $("#btnExport").onclick = doExport; $("#robotBtn").onclick = toggleRobot;
 document.querySelectorAll("[data-pad]").forEach((el) => {
   el.addEventListener("pointerdown", (e) => { e.preventDefault(); pad(el.dataset.pad, true); });
   ["pointerup", "pointerleave", "pointercancel"].forEach((ev) => el.addEventListener(ev, () => { if (pressed.has(el.dataset.pad)) pad(el.dataset.pad, false); }));
@@ -412,5 +504,5 @@ document.querySelectorAll("[data-view]").forEach((b) => (b.onclick = () => robot
   robot.set(full(REST_POSE));
   $("#loading").hidden = true;
   render(); renderCard(); renderList(); renderCommands(); renderSafety(); showTab(0); updateVoiceNote();
-  previewPose();
+  previewPose(); probeStudio();
 })();

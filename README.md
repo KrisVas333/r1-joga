@@ -52,3 +52,6 @@ Key from `ELEVENLABS_API_KEY` or `~/.config/elevenlabs/key`. **Never commit the 
 ## Licencijos · Licences
 Code: © Kristijonas Vasiliauskas / Robotikos Akademija. R1 model: Unitree `unitree_mujoco`, **BSD-3** (see `NOTICE`). three.js: MIT.
 ⚗️ Eksperimentinis prototipas, sukurtas su AI. Gali klysti, svarbius dalykus pasitikrinkite. Nemokamas. Atsiliepimai laukiami: krisvas.lt
+
+## 🤖 Tikras robotas / Real robot
+Žingsnis po žingsnio: [INSTALL.md](INSTALL.md) (R1 Studio serveris rodo šią programą adresu `/joga/`, mygtukas 🤖 Robotas + GO). Per-pose r1ctl moves: `export/poses/`, check: `python3 tools/check_exports.py ~/r1/r1ctl`.

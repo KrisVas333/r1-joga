@@ -3,3 +3,4 @@
 *.key
 elevenlabs-key*
 __pycache__/
+audio/test_*.mp3

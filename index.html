@@ -25,6 +25,12 @@
   <span id="levelName" class="lname"></span>
 </section>
 <div id="lockBanner" class="lock" hidden></div>
+<section id="robotBar" class="robotbar" aria-live="polite">
+  <span id="robotNote" class="rnote">🤖 Robotas: paleisk iš R1 Studio serverio</span>
+  <button id="robotBtn" class="ghost" hidden aria-pressed="false">🤖 Robotas</button>
+  <span id="robotChip" class="rchip" hidden></span>
+  <span id="robotLog" class="mono small rlog"></span>
+</section>
 
 <main class="grid">
   <section class="stage">
@@ -100,6 +106,15 @@
   <button id="btnExplain" class="ctl">?<span data-t="explain">Paaiškink pozą</span></button>
   <div class="tempo"><button id="btnSlower" aria-label="lėčiau">−</button><span id="tempo" class="mono small"></span><button id="btnFaster" aria-label="greičiau">+</button></div>
   <button id="btnStop" class="ctl stop">■<span data-t="stop">STOP</span></button>
+</div>
+
+<div id="goModal" class="modal" hidden>
+  <div class="mbox">
+    <p class="q" id="goTitle">⚠️ Tikras robotas</p>
+    <ul class="golist" id="goList"></ul>
+    <label class="golbl"><span id="goAsk">Įrašyk GO:</span> <input id="goInput" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="4"></label>
+    <div class="yn"><button id="goOk" class="big go">GO</button><button id="goCancel" class="big">✋ <span data-t="no">Ne</span></button></div>
+  </div>
 </div>
 
 <div id="checkin" class="modal" hidden>
