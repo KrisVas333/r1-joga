@@ -138,3 +138,5 @@ body.flash .controls{background:#FDECEF}
 .golist{margin:8px 0 12px;padding-left:20px;text-align:left}
 .golbl{display:block;margin:0 0 12px;font-weight:700}
 #goInput{font:700 22px var(--mono);width:5.5em;padding:8px;border:2px solid var(--ink);border-radius:var(--r);text-transform:uppercase;text-align:center}
+
+.voicepick{display:inline-flex}.voicepick select{cursor:pointer;appearance:auto}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}

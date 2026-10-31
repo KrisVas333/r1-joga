@@ -60,7 +60,7 @@ const COMMANDS = [
 
 const S = {
   lang: "lt", level: 1, flow: byLevel(1), idx: 0, phase: "idle", tempo: 1, paused: false, stopped: false,
-  ctrl: null, runId: 0, checkin: null, manifest: { lt: [], en: [] }, audio: null, rec: null, listening: false,
+  ctrl: null, runId: 0, checkin: null, manifest: { voices: {} }, voice: "kris", audio: null, rec: null, listening: false,
 };
 const robot = new Robot3D($("#view"));
 window.__r1joga = { S, robot }; // for QA in the console
@@ -74,7 +74,7 @@ const enVoice = () => voices.find((v) => /^en-US/i.test(v.lang) && /Google|Natur
 function updateVoiceNote() {
   const n = $("#voiceNote");
   if (!n) return;
-  const miss = S.lang === "lt" && voices.length && !ltVoice() && !S.manifest.lt.length;
+  const miss = S.lang === "lt" && voices.length && !ltVoice() && !hasClip(null, "lt");
   n.textContent = miss ? UI.lt.ltVoiceMissing : "";
   n.hidden = !miss;
 }
@@ -82,14 +82,20 @@ function stopSpeech() {
   try { speechSynthesis.cancel(); } catch (e) {}
   if (S.audio) { S.audio.pause(); S.audio = null; }
 }
-// Speaks one line: Kris's ElevenLabs mp3 if listed in audio/manifest.json, else browser TTS.
+// Recorded clips: audio/<voice>/<lang>/<id>.mp3, listed in audio/manifest.json → voices.
+const VOICE_IDS = ["kris", "female", "robot", "yogi"];
+function hasClip(id, lang, voice = S.voice) {
+  const l = S.manifest.voices && S.manifest.voices[voice] && S.manifest.voices[voice][lang];
+  return !!(l && (id ? l.includes(id) : l.length));
+}
+// Speaks one line: the chosen recorded voice if listed in audio/manifest.json, else browser TTS.
 function say(id, text, { rate = 1, lang = S.lang } = {}) {
   setCaption(text);
   stopSpeech();
   return new Promise((resolve) => {
     const done = () => { clearTimeout(timer); resolve(); };
     const timer = setTimeout(resolve, Math.max(2500, text.length * 110 / rate)); // safety net if onend never fires
-    if (R.on && R.eleven) { // robot mode: Kris's ElevenLabs voice rendered by the studio server (/api/tts, cached there)
+    if (R.on && R.eleven && !hasClip(id, lang)) { // robot mode, no recorded clip: Kris's ElevenLabs voice rendered by the studio server (/api/tts, cached there)
       const my = ++R.sayId;
       fetch(`/api/tts?text=${encodeURIComponent(text)}`).then((r) => (r.ok ? r.blob() : Promise.reject(r.status))).then((b) => {
         if (my !== R.sayId) return resolve();
@@ -100,8 +106,8 @@ function say(id, text, { rate = 1, lang = S.lang } = {}) {
     }
     local();
     function local() {
-      if (id && S.manifest[lang] && S.manifest[lang].includes(id)) {
-        const a = new Audio(`audio/${lang}/${id}.mp3`); a.playbackRate = rate; S.audio = a;
+      if (id && hasClip(id, lang)) {
+        const a = new Audio(`audio/${S.voice}/${lang}/${id}.mp3`); a.playbackRate = rate; S.audio = a;
         a.onended = done; a.onerror = () => tts(); a.play().catch(() => tts());
         return;
       }
@@ -491,6 +497,14 @@ $("#btnExplain").onclick = () => explain(); $("#btnStop").onclick = stop;
 $("#btnSlower").onclick = () => setTempo(-0.25); $("#btnFaster").onclick = () => setTempo(0.25);
 $("#yes").onclick = () => answer(true); $("#no").onclick = () => answer(false);
 $("#langBtn").onclick = () => setLang(S.lang === "lt" ? "en" : "lt");
+try { const v = localStorage.getItem("r1joga.voice"); if (VOICE_IDS.includes(v)) S.voice = v; } catch (e) {}
+$("#voiceSel").value = S.voice;
+$("#voiceSel").onchange = (e) => {
+  S.voice = e.target.value;
+  try { localStorage.setItem("r1joga.voice", S.voice); } catch (er) {}
+  stopSpeech(); updateVoiceNote();
+  say("checkin_continue", S.lang === "lt" ? "Ar galime tęsti?" : "Can we continue?");
+};
 $("#micBtn").onclick = toggleMic; $("#btnExport").onclick = doExport; $("#robotBtn").onclick = toggleRobot;
 document.querySelectorAll("[data-pad]").forEach((el) => {
   el.addEventListener("pointerdown", (e) => { e.preventDefault(); pad(el.dataset.pad, true); });
